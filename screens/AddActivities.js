@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState, useContext }from 'react'
 
 export default function AddActivities() {
@@ -18,7 +18,7 @@ export default function AddActivities() {
     { label: 'Hiking', value: 'Hiking' },
   ]);
 
-  const OnSave = () => {
+  const onSave = () => {
     if (! activity || duration.trim() === '' || ! date) {
       Alert.alert('Error', 'Please enter all fields')
       return
@@ -45,7 +45,7 @@ export default function AddActivities() {
     navigation.goBack();
   };
 
-  const OnCancel = () => {
+  const onCancel = () => {
     navigation.goBack();
   };
 
@@ -71,8 +71,42 @@ export default function AddActivities() {
         placeholder="Select an activity"
         style={styles.dropDown}
       />
+      <Text>Duration *</Text>
+      <TextInput
+        style={styles.input}
+        value={duration}
+        onChangeText={setDuration}
+        keyboardType="numeric"
+      />
+      <Text>Date *</Text>
+      <TextInput
+        style={styles.input}
+        value={date.toDateString()}
+        onFocus={showDatePicker}
+        placeholder='Select a date'
+      />
+
+      {showPicker && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display="default"
+          onChange={onDateChange}
+        />
+      )}
+
+      <View style={styles.buttonContainer}>
+        <Button title="Save" onPress={onSave} />
+        <Button title="Cancel" onPress={onCancel} color="red" />
+      </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#c5c5f1',
+  },
+})
