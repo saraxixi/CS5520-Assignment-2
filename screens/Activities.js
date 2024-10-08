@@ -17,7 +17,7 @@ export default function Activities({}) {
           keyExtractor={(item) => item.id}
         />
       ) : (
-        <Text style={styles.emptyText}>No activities available</Text>
+        <Text></Text>
       )}
     </View>
   )

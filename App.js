@@ -43,47 +43,47 @@ export default function App() {
 
   return (
     <ItemsProvider>
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{headerShown: false}}>
-        <Tab.Screen 
-          name="ActivitiesTab" 
-          component={ActivitiesStack} 
-          options={{
-            tabBarLabel: 'Activities',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="running" size={24} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Diet" 
-          component={Diet}
-          options={() => ({
-            tabBarLabel: 'Diet',
-            tabBarIcon: ({ color }) => (
-              <MaterialIcons name="fastfood" size={24} color={color} />
-            ),
-            headerRight: () => (
-              <Button title="Add" onPress={() => (console.log("onPress"))}/>
-            ),
-          })}
-        />
-        <Tab.Screen
-          name="Settings" 
-          component={Settings}
-          options={() => ({
-            tabBarLabel: 'Settings',
-            tabBarIcon: ({ color }) => (
-              <SimpleLineIcons name="settings" size={24} color={color} />
-            ),
-            headerRight: () => (
-              <Button title="Add" onPress={() => (console.log("onPress"))}/>
-            ),
-          })}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={{headerShown: false}}>
+          <Tab.Screen 
+            name="ActivitiesTab" 
+            component={ActivitiesStack} 
+            options={{
+              tabBarLabel: 'Activities',
+              tabBarIcon: ({ color }) => (
+                <FontAwesome5 name="running" size={24} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="DietTab" 
+            component={Diet}
+            options={() => ({
+              tabBarLabel: 'Diet',
+              tabBarIcon: ({ color }) => (
+                <MaterialIcons name="fastfood" size={24} color={color} />
+              ),
+              headerRight: () => (
+                <Button title="Add" onPress={() => (console.log("onPress"))}/>
+              ),
+            })}
+          />
+          <Tab.Screen
+            name="SettingsTab" 
+            component={Settings}
+            options={() => ({
+              tabBarLabel: 'Settings',
+              tabBarIcon: ({ color }) => (
+                <SimpleLineIcons name="settings" size={24} color={color} />
+              ),
+              headerRight: () => (
+                <Button title="Add" onPress={() => (console.log("onPress"))}/>
+              ),
+            })}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
     </ItemsProvider>
 
   );
