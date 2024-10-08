@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Item from '../components/Item'
 
-export default function Activities() {
+export default function Activities({items}) {
   return (
     <View>
-      <Text>Activities</Text>
+      <Item itemName="Running" date="12/12/2020" time="12:00" />
     </View>
   )
 }

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -20,32 +20,41 @@ export default function App() {
         <Tab.Screen 
           name="Activities" 
           component={Activities} 
-          options={{
+          options={({navigation}) => ({
             tabBarLabel: 'Activities',
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="running" size={24} color={color} />
             ),
-          }}
+            headerRight: () => (
+              <Button title="Add" onPress={() => (console.log("onPress"))}/>
+            ),
+          })}
         />
         <Tab.Screen
           name="Diet" 
           component={Diet}
-          options={{
+          options={() => ({
             tabBarLabel: 'Diet',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="fastfood" size={24} color={color} />
             ),
-          }}
+            headerRight: () => (
+              <Button title="Add" onPress={() => (console.log("onPress"))}/>
+            ),
+          })}
         />
         <Tab.Screen
           name="Settings" 
           component={Settings}
-          options={{
+          options={() => ({
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
               <SimpleLineIcons name="settings" size={24} color={color} />
             ),
-          }}
+            headerRight: () => (
+              <Button title="Add" onPress={() => (console.log("onPress"))}/>
+            ),
+          })}
         />
       </Tab.Navigator>
     </NavigationContainer>
