@@ -1,12 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import React, {useContext} from 'react'
 import Item from '../components/Item'
 import { ItemsContext } from '../components/ItemsContext'
 
-export default function Activities({items}) {
+export default function Activities({}) {
+  const { items } = useContext(ItemsContext)
+
   return (
     <View>
-      <Item itemName="Running" date="12/12/2020" time="12:00" />
+      {items.activities.length > 0 ? (
+        <FlatList
+          data={items.activities}
+          renderItem={({ item }) => (
+            <Item itemName={item.itemName} date={item.date} time={item.time} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      ) : (
+        <Text style={styles.emptyText}>No activities available</Text>
+      )}
     </View>
   )
 }
