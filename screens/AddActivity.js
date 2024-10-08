@@ -1,5 +1,5 @@
 import { Alert, StyleSheet, Text, TextInput, View, Button} from 'react-native'
-import React, { useState, useContext, act }from 'react'
+import React, { useState, useContext }from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
