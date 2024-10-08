@@ -15,8 +15,15 @@ export function ItemsProvider({ children }) {
     }));
   };
 
+  const addDiet = (newDiet) => {
+    setItems((prevItems) => ({
+      ...prevItems,
+      diet: [...prevItems.diet, newDiet],
+    }));
+  }
+
   return (
-    <ItemsContext.Provider value={{ items, setItems, addActivity }}>
+    <ItemsContext.Provider value={{ items, setItems, addActivity, addDiet }}>
       {children}
     </ItemsContext.Provider>
   );
