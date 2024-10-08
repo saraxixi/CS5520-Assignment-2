@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Item from '../components/Item'
+import { ItemsContext } from '../components/ItemsContext'
 
 export default function Activities({items}) {
   return (

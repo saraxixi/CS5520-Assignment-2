@@ -11,6 +11,7 @@ import Activities from './screens/Activities';
 import Diet from './screens/Diet';
 import Settings from './screens/Settings';
 import AddActivity from './screens/AddActivity';
+import { ItemsProvider } from './components/ItemsContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,11 +42,12 @@ export default function App() {
   }
 
   return (
+    <ItemsProvider>
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{headerShown: false}}>
         <Tab.Screen 
-          name="Activities" 
+          name="ActivitiesTab" 
           component={ActivitiesStack} 
           options={{
             tabBarLabel: 'Activities',
@@ -82,6 +84,7 @@ export default function App() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+    </ItemsProvider>
 
   );
 }

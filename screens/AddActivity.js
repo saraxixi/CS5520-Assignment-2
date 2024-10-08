@@ -1,13 +1,17 @@
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View, Button} from 'react-native'
 import React, { useState, useContext }from 'react'
+import DropDownPicker from 'react-native-dropdown-picker'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { ItemsContext } from '../components/ItemsContext'
 
-export default function AddActivity() {
-  const { addActivity } = useContext(ActivityContext)
+export default function AddActivity({navigation}) {
+  const { addActivity } = useContext(ItemsContext)
 
   const [activity, setActivity] = useState(null)
   const [duration, setDuration] = useState('')
   const [date, setDate] = useState(new Date())
   const [showPicker, setShowPicker] = useState(false)
+  const [open, setOpen] = useState(false)
   const [items] = useState([
     { label: 'Walking', value: 'Walking' },
     { label: 'Running', value: 'Running' },
