@@ -22,7 +22,7 @@ export default function AddActivity({navigation}) {
     { label: 'Hiking', value: 'Hiking' },
   ]);
 
-  const onSave = () => {
+  function onSave () {
     if (! activity || duration.trim() === '' || ! date) {
       Alert.alert('Error', 'Please enter all fields')
       return
@@ -48,15 +48,15 @@ export default function AddActivity({navigation}) {
     navigation.goBack();
   };
 
-  const onCancel = () => {
+  function onCancel () {
     navigation.goBack();
   };
 
-  const showDatePicker = () => {
+  function showDatePicker () {
     setShowPicker(true);
   }
 
-  const onDateChange = (event, selectedDate) => {
+  function onDateChange (selectedDate) {
     const currentDate = selectedDate || date;
     setShowPicker(false);
     setDate(currentDate);
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 
   activityContainer: {
     flexDirection: 'column',
-    zIndex: 2000,
+    zIndex: 1000,
   },
 
   durationContainer: {
@@ -137,14 +137,12 @@ const styles = StyleSheet.create({
   dropDown: {
     backgroundColor: 'lightgray',
     marginBottom: 20,
-    zIndex: 3000,
     elevation: 3
   },
 
   dropDownContainer: {
     backgroundColor: '#fff',
     borderColor: '#3b3c7e',
-    zIndex: 3000,
   },
 
   input: {
@@ -153,6 +151,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     borderWidth: 1,
-    zIndex: 1000,
   },
 })
