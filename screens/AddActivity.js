@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState, useContext }from 'react'
 
-export default function AddActivities() {
+export default function AddActivity() {
   const { addActivity } = useContext(ActivityContext)
 
   const [activity, setActivity] = useState(null)
