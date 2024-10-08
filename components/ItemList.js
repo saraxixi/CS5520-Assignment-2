@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function Item({itemName, date, value, isSpecial, type}) {
+export default function ItemList({itemName, date, value, isSpecial, type}) {
   const valueLabel = type === 'Activity' ? 'min' : '';
 
   return (

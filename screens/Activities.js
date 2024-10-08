@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, {useContext} from 'react'
-import Item from '../components/Item'
+import ItemList from '../components/ItemList'
 import { ItemsContext } from '../components/ItemsContext'
 
 export default function Activities({}) {
@@ -12,7 +12,7 @@ export default function Activities({}) {
         <FlatList
           data={items.activities}
           renderItem={({ item }) => (
-            <Item itemName={item.itemName} date={item.date} value={item.duration} isSpecial={item.isSpecial} type={'Activity'}/>
+            <ItemList itemName={item.itemName} date={item.date} value={item.duration} isSpecial={item.isSpecial} type={'Activity'}/>
           )}
           keyExtractor={(item) => item.id}
         />
