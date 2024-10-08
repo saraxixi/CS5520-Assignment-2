@@ -1,5 +1,5 @@
 import { Alert, StyleSheet, Text, TextInput, View, Button} from 'react-native'
-import React, { useState, useContext }from 'react'
+import React, { useState, useContext, act }from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
@@ -65,24 +65,36 @@ export default function AddActivity({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text>Activity *</Text>
-      <DropDownPicker
-        open={ open }
-        value={ activity }
-        items={ items }
-        setOpen={setOpen}
-        setValue={setActivity}
-        placeholder="Select an activity"
-        style={styles.dropDown}
-      />
-      <Text>Duration *</Text>
-      <TextInput
-        style={styles.input}
-        value={duration}
-        onChangeText={setDuration}
-        keyboardType="numeric"
-      />
-      <Text>Date *</Text>
+      <View style={styles.activityContainer}>
+        <Text style={styles.label}>Activity *</Text>
+        <DropDownPicker
+          open={ open }
+          value={ activity }
+          items={ items }
+          setOpen={setOpen}
+          setValue={setActivity}
+          placeholder="Select an activity"
+          style={styles.dropDown}
+          dropDownContainerStyle={styles.dropDownContainer}
+          zIndex={9999}
+          containerStyle={{ marginBottom: 20 }}
+          modalProps={{
+            animationType: 'fade'
+          }}
+        />
+      </View>
+
+      <View style={styles.activityContainer}>
+        <Text style={styles.label}>Duration (min) *</Text>
+        <TextInput
+          style={styles.input}
+          value={duration}
+          onChangeText={setDuration}
+          keyboardType="numeric"
+        />
+      </View>
+
+      <Text style={styles.label}>Date *</Text>
       <TextInput
         style={styles.input}
         value={date.toDateString()}
@@ -94,7 +106,7 @@ export default function AddActivity({navigation}) {
         <DateTimePicker
           value={date}
           mode="date"
-          display="default"
+          display="inline"
           onChange={onDateChange}
         />
       )}
@@ -110,7 +122,39 @@ export default function AddActivity({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     padding: 20,
     backgroundColor: '#c5c5f1',
+  },
+
+  activityContainer: {
+    flexDirection: 'column',
+    zIndex: 2000,
+  },
+
+  label: {
+    marginBottom: 5,
+  },
+
+  dropDown: {
+    backgroundColor: 'lightgray',
+    marginBottom: 20,
+    zIndex: 3000,
+    elevation: 3
+  },
+
+  dropDownContainer: {
+    backgroundColor: '#fff',
+    borderColor: '#3b3c7e',
+    zIndex: 3000,
+  },
+
+  input: {
+    backgroundColor: 'lightgray',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+    borderWidth: 1,
+    zIndex: 1000,
   },
 })
