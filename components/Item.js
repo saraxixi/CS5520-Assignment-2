@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function Item({itemName, date, time}) {
+export default function Item({itemName, date, value, isSpecial, type}) {
+  const valueLabel = type === 'Activity' ? 'min' : '';
+
   return (
     <View style={styles.container}>
       <Text style={styles.itemName}>{itemName}</Text>
       <View style={styles.detailsContainer}>
+        <View style={styles.icon}>
+          {isSpecial ? <Ionicons name="warning" size={24} color="#FFC300" /> : null}
+        </View>
         <Text style={styles.date}>{date}</Text>
-      </View>
-      <View style={styles.detailsContainer}>
-        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.value}>{`${value} ${valueLabel}`}</Text>
       </View>
     </View>
   )
@@ -29,8 +33,8 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 5,
+    // backgroundColor: 'white',
+    // padding: 5,
     borderRadius: 5,
   },
 
@@ -42,9 +46,18 @@ const styles = StyleSheet.create({
 
   date: {
     color: 'blue',
+    backgroundColor: 'white',
+    padding: 5,
+    marginRight: 10,
   },
 
-  time: {
+  value: {
     color: 'blue',
+    backgroundColor: 'white',
+    padding: 5,
+  },
+
+  icon: {
+    marginRight: 10
   }
 })

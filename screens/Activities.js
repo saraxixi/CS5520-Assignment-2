@@ -12,7 +12,7 @@ export default function Activities({}) {
         <FlatList
           data={items.activities}
           renderItem={({ item }) => (
-            <Item itemName={item.itemName} date={item.date} time={item.time} />
+            <Item itemName={item.itemName} date={item.date} value={item.duration} isSpecial={item.isSpecial} type={'Activity'}/>
           )}
           keyExtractor={(item) => item.id}
         />

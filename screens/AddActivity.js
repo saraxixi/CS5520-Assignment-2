@@ -40,7 +40,6 @@ export default function AddActivity({navigation}) {
       id: Date.now().toString(),
       itemName: activity,
       date: date.toDateString(),
-      time: `${date.getHours()}:${date.getMinutes()}`,
       duration: durationValue,
       isSpecial
     };
@@ -76,15 +75,10 @@ export default function AddActivity({navigation}) {
           placeholder="Select an activity"
           style={styles.dropDown}
           dropDownContainerStyle={styles.dropDownContainer}
-          zIndex={9999}
-          containerStyle={{ marginBottom: 20 }}
-          modalProps={{
-            animationType: 'fade'
-          }}
         />
       </View>
 
-      <View style={styles.activityContainer}>
+      <View style={styles.durationContainer}>
         <Text style={styles.label}>Duration (min) *</Text>
         <TextInput
           style={styles.input}
@@ -130,6 +124,10 @@ const styles = StyleSheet.create({
   activityContainer: {
     flexDirection: 'column',
     zIndex: 2000,
+  },
+
+  durationContainer: {
+    flexDirection: 'column',
   },
 
   label: {
