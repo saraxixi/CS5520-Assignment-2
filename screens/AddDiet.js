@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native'
 import React,  { useContext, useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
+import Styles, { commonStyles } from '../components/Styles'
 
 export default function AddDiet({navigation}) {
   const {addDiet} = useContext(ItemsContext)
@@ -50,29 +51,29 @@ export default function AddDiet({navigation}) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.descriptionContaniner}>
-        <Text style={styles.label}>Description *</Text>
+    <View style={commonStyles.container}>
+      <View style={commonStyles.subContaniner}>
+        <Text style={commonStyles.label}>Description *</Text>
         <TextInput
-          style={styles.descriptionInput}
+          style={commonStyles.descriptionInput}
           value={description}
           onChangeText={setDescription}
         />
       </View>
 
-      <View style={styles.caloriesContainer}>
-        <Text style={styles.label}>Calories *</Text>
+      <View style={commonStyles.subContaniner}>
+        <Text style={commonStyles.label}>Calories *</Text>
         <TextInput
-          style={styles.input}
+          style={commonStyles.input}
           value={calories}
           onChangeText={setCalories}
         />
       </View>
 
-      <View style={styles.dateContainer}>
-        <Text style={styles.label}>Date *</Text>
+      <View style={commonStyles.subContaniner}>
+        <Text style={commonStyles.label}>Date *</Text>
         <TextInput
-        style={styles.input}
+        style={commonStyles.input}
         value={date.toDateString()}
         onFocus={showDatePicker}
         placeholder='Select a date'
@@ -86,51 +87,11 @@ export default function AddDiet({navigation}) {
           />
         )}
       </View>
-
-      <Button title="Save" onPress={onSave} />
-      <Button title="Cancel" color={'red'} onPress={onCancel} />
+      
+      <View style={commonStyles.buttonContainer}>
+        <Button title="Save" onPress={onSave} />
+        <Button title="Cancel" color={'red'} onPress={onCancel} />
+      </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    padding: 20,
-    backgroundColor: '#c5c5f1',
-  },
-
-  descriptionContaniner: {
-    flexDirection: 'column',
-  },
-
-  caloriesContainer: {
-    flexDirection: 'column',
-  },
-
-  dateContainer: {
-    flexDirection: 'column',
-  },
-  
-  label: {
-    marginBottom: 5,
-  },
-
-  input: {
-    backgroundColor: 'lightgray',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-  },
-
-  descriptionInput: {
-    backgroundColor: 'lightgray',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-    height: 100,
-  }
-})

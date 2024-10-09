@@ -23,9 +23,14 @@ const fontSize = {
 
 const commonStyles = {
   container: {
+    flex: 1,
     flexDirection: 'column',
     padding: spacing.large,
     backgroundColor: colors.secondary,
+  },
+
+  subContaniner: {
+    flexDirection: 'column',
   },
 
   itemListContainer: {
@@ -82,6 +87,20 @@ const commonStyles = {
     borderWidth: 1,
   },
 
+  descriptionInput: {
+    backgroundColor: 'lightgray',
+    padding: spacing.medium,
+    borderRadius: 5,
+    marginBottom: spacing.large,
+    borderWidth: 1,
+    height: 100,
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  
   button: {
     padding: spacing.medium,
     borderRadius: 5,
