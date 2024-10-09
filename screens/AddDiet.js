@@ -16,11 +16,17 @@ export default function AddDiet({navigation}) {
       return
     }
 
+    if (isNaN(parseInt(calories, 10)) || calories <= 0) {
+      Alert.alert('Error', 'Please enter a valid number for calories')
+      return
+    }
+
     const newDiet = {
       id: Date.now().toString(),
       description: description,
       date: date.toDateString(),
       calories: calories,
+      isSpecial: calories > 800,
     }
 
     addDiet(newDiet)
@@ -54,7 +60,7 @@ export default function AddDiet({navigation}) {
         />
       </View>
 
-      <View>
+      <View style={styles.caloriesContainer}>
         <Text style={styles.label}>Calories *</Text>
         <TextInput
           style={styles.input}
@@ -63,7 +69,7 @@ export default function AddDiet({navigation}) {
         />
       </View>
 
-      <View>
+      <View style={styles.dateContainer}>
         <Text style={styles.label}>Date *</Text>
         <TextInput
         style={styles.input}
@@ -99,6 +105,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+  caloriesContainer: {
+    flexDirection: 'column',
+  },
+
+  dateContainer: {
+    flexDirection: 'column',
+  },
+  
   label: {
     marginBottom: 5,
   },
@@ -117,6 +131,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     borderWidth: 1,
-    height: 150,
+    height: 100,
   }
 })

@@ -1,0 +1,95 @@
+import ItemList from "./ItemList";
+
+const colors = {
+  primary: '#3b3c7e',
+  secondary: '#c5c5f1',
+  white: '#ffffff',
+  blue: 'blue',
+  warning: '#FFC300',
+  lightGray: 'lightgray',
+};
+
+const spacing = {
+  small: 5,
+  medium: 10,
+  large: 20,
+};
+
+const fontSize = {
+  small: 12,
+  medium: 16,
+  large: 20,
+};
+
+const commonStyles = {
+  container: {
+    flexDirection: 'column',
+    padding: spacing.large,
+    backgroundColor: colors.secondary,
+  },
+
+  itemListContainer: {
+    flex: 1,
+    padding: spacing.medium,
+    flexDirection: 'row',
+    padding: spacing.medium,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    borderRadius: 5,
+    justifyContent: 'space-between',
+    margin: spacing.medium,
+  },
+
+  itemDetailsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+
+  itemText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: fontSize.medium,
+  },
+
+  itemDate: {
+    color: colors.blue,
+    backgroundColor: colors.white,
+    padding: spacing.small,
+    marginRight: spacing.medium,
+  },
+
+  itemValue: {
+    color: colors.blue,
+    backgroundColor: colors.white,
+    padding: spacing.small,
+  },
+
+  text: {
+    color: colors.primary,
+    fontSize: fontSize.medium,
+  },
+
+  label: {
+    marginBottom: spacing.small,
+  },
+
+  input: {
+    backgroundColor: colors.lightGray,
+    padding: spacing.medium,
+    borderRadius: 5,
+    marginBottom: spacing.large,
+    borderWidth: 1,
+  },
+
+  button: {
+    padding: spacing.medium,
+    borderRadius: 5,
+  },
+  
+  icon: {
+    marginRight: spacing.medium,
+  },
+};
+
+export { colors, spacing, fontSize, commonStyles };
