@@ -1,5 +1,3 @@
-import ItemList from "./ItemList";
-
 const colors = {
   primary: '#3b3c7e',
   secondary: '#c5c5f1',
@@ -100,7 +98,12 @@ const commonStyles = {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  
+
+  activityContainer: {
+    flexDirection: 'column',
+    zIndex: 1000,
+  },
+
   button: {
     padding: spacing.medium,
     borderRadius: 5,
