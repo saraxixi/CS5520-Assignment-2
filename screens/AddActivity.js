@@ -10,6 +10,7 @@ export default function AddActivity({navigation}) {
   const [activity, setActivity] = useState(null)
   const [duration, setDuration] = useState('')
   const [date, setDate] = useState(new Date())
+
   const [showPicker, setShowPicker] = useState(false)
   const [open, setOpen] = useState(false)
   const [items] = useState([
@@ -46,6 +47,8 @@ export default function AddActivity({navigation}) {
 
     addActivity(newActivity);
     navigation.goBack();
+
+    console.log(newActivity);
   };
 
   function onCancel () {
@@ -56,7 +59,7 @@ export default function AddActivity({navigation}) {
     setShowPicker(true);
   }
 
-  function onDateChange (selectedDate) {
+  function onDateChange (event, selectedDate) {
     const currentDate = selectedDate || date;
     setShowPicker(false);
     setDate(currentDate);
@@ -88,22 +91,24 @@ export default function AddActivity({navigation}) {
         />
       </View>
 
-      <Text style={styles.label}>Date *</Text>
-      <TextInput
-        style={styles.input}
-        value={date.toDateString()}
-        onFocus={showDatePicker}
-        placeholder='Select a date'
-      />
-
-      {showPicker && (
-        <DateTimePicker
-          value={date}
-          mode="date"
-          display="inline"
-          onChange={onDateChange}
+      <View style={styles.dateContainer}>
+        <Text style={styles.label}>Date *</Text>
+        <TextInput
+          style={styles.input}
+          value={date.toDateString()} // Correct method usage
+          onFocus={showDatePicker}
+          placeholder='Select a date'
         />
-      )}
+
+        {showPicker && (
+          <DateTimePicker
+            value={date}
+            mode="date"
+            display="inline"
+            onChange={onDateChange}
+          />
+        )}
+      </View>
 
       <View style={styles.buttonContainer}>
         <Button title="Save" onPress={onSave} />
@@ -130,6 +135,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+  dateContainer: {
+    flexDirection: 'column',
+  },
+  
   label: {
     marginBottom: 5,
   },
