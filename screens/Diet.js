@@ -22,6 +22,3 @@ export default function Diet() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-})

@@ -22,5 +22,3 @@ export default function Activities({}) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({})
