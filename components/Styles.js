@@ -1,10 +1,12 @@
 const colors = {
   primary: '#3b3c7e',
-  secondary: '#c5c5f1',
+  light: '#c5c5f1',
+  dark: '#5b5cb5',
   white: '#ffffff',
   blue: 'blue',
   warning: '#FFC300',
   lightGray: 'lightgray',
+  black: 'black',
 };
 
 const spacing = {
@@ -32,11 +34,18 @@ const commonBottomTabStyles = {
 };
 
 const commonStyles = {
-  container: {
+  lightContainer: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: colors.light,
     padding: spacing.large,
-    backgroundColor: colors.secondary,
+  },
+
+  darkContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: colors.dark,
+    padding: spacing.large,
   },
 
   subContaniner: {
@@ -47,12 +56,11 @@ const commonStyles = {
     flex: 1,
     padding: spacing.medium,
     flexDirection: 'row',
-    padding: spacing.medium,
     backgroundColor: colors.primary,
     alignItems: 'center',
     borderRadius: 5,
     justifyContent: 'space-between',
-    margin: spacing.medium,
+    marginBottom: spacing.medium,
   },
 
   itemDetailsContainer: {
@@ -72,12 +80,14 @@ const commonStyles = {
     backgroundColor: colors.white,
     padding: spacing.small,
     marginRight: spacing.medium,
+    fontWeight: 'bold',
   },
 
   itemValue: {
     color: colors.blue,
     backgroundColor: colors.white,
     padding: spacing.small,
+    fontWeight: 'bold',
   },
 
   text: {
@@ -85,7 +95,13 @@ const commonStyles = {
     fontSize: fontSize.medium,
   },
 
-  label: {
+  lightLabel: {
+    color: colors.black,
+    marginBottom: spacing.small,
+  },
+
+  darkLabel: {
+    color: colors.white,
     marginBottom: spacing.small,
   },
 
@@ -103,6 +119,7 @@ const commonStyles = {
     borderRadius: 5,
     marginBottom: spacing.large,
     borderWidth: 1,
+    textAlignVertical: 'top',
     height: 100,
   },
 
@@ -116,6 +133,12 @@ const commonStyles = {
     zIndex: 1000,
   },
 
+  themeButtonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  
   button: {
     padding: spacing.medium,
     borderRadius: 5,

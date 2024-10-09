@@ -3,8 +3,10 @@ import React,  { useContext, useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
 import Styles, { commonStyles } from '../components/Styles'
+import { ThemeContext } from '../components/ThemeContext'
 
 export default function AddDiet({navigation}) {
+  const {theme} = useContext(ThemeContext)
   const {addDiet} = useContext(ItemsContext)
   const [description, setDescription] = useState('')
   const [calories, setCalories] = useState('')
@@ -51,18 +53,19 @@ export default function AddDiet({navigation}) {
   }
 
   return (
-    <View style={commonStyles.container}>
+    <View style={theme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer}>
       <View style={commonStyles.subContaniner}>
-        <Text style={commonStyles.label}>Description *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Description *</Text>
         <TextInput
           style={commonStyles.descriptionInput}
+          multiline={true}
           value={description}
           onChangeText={setDescription}
         />
       </View>
 
       <View style={commonStyles.subContaniner}>
-        <Text style={commonStyles.label}>Calories *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Calories *</Text>
         <TextInput
           style={commonStyles.input}
           value={calories}
@@ -71,7 +74,7 @@ export default function AddDiet({navigation}) {
       </View>
 
       <View style={commonStyles.subContaniner}>
-        <Text style={commonStyles.label}>Date *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Date *</Text>
         <TextInput
         style={commonStyles.input}
         value={date.toDateString()}

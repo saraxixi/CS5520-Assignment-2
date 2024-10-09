@@ -4,9 +4,11 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
 import { commonStyles } from '../components/Styles'
+import { ThemeContext } from '../components/ThemeContext'
 
 export default function AddActivity({navigation}) {
   const { addActivity } = useContext(ItemsContext)
+  const { theme } = useContext(ThemeContext)
 
   const [activity, setActivity] = useState(null)
   const [duration, setDuration] = useState('')
@@ -67,9 +69,9 @@ export default function AddActivity({navigation}) {
   }
 
   return (
-    <View style={commonStyles.container}>
+    <View style={theme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer}>
       <View style={commonStyles.activityContainer}>
-        <Text style={commonStyles.label}>Activity *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Activity *</Text>
         <DropDownPicker
           open={ open }
           value={ activity }
@@ -78,13 +80,14 @@ export default function AddActivity({navigation}) {
           setValue={setActivity}
           placeholder="Select an activity"
           style={styles.dropDown}
+          dropDownContainerStyle={styles.dropDownContainer}
         />
       </View>
 
       <View style={commonStyles.subContaniner}>
-        <Text style={commonStyles.label}>Duration (min) *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Duration (min) *</Text>
         <TextInput
-          style={commonStyles.input}
+          style={styles.input}
           value={duration}
           onChangeText={setDuration}
           keyboardType="numeric"
@@ -92,7 +95,7 @@ export default function AddActivity({navigation}) {
       </View>
 
       <View style={commonStyles.subContaniner}>
-        <Text style={commonStyles.label}>Date *</Text>
+        <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Date *</Text>
         <TextInput
           style={commonStyles.input}
           value={date.toDateString()} // Correct method usage
@@ -119,9 +122,23 @@ export default function AddActivity({navigation}) {
 }
 
 const styles = StyleSheet.create({
+
   dropDown: {
     backgroundColor: 'lightgray',
     marginBottom: 20,
     elevation: 3
+  },
+
+  dropDownContainer: {
+    backgroundColor: '#fff',
+    borderColor: '#3b3c7e',
+  },
+
+  input: {
+    backgroundColor: 'lightgray',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+    borderWidth: 1,
   },
 })

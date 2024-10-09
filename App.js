@@ -13,6 +13,7 @@ import Settings from './screens/Settings';
 import AddActivity from './screens/AddActivity';
 import AddDiet from './screens/AddDiet';
 import { ItemsProvider } from './components/ItemsContext';
+import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles } from './components/Styles';
 
 const Stack = createStackNavigator();
@@ -69,7 +70,20 @@ export default function App() {
     );
   }
 
+  function SettingsStack() {
+    return (
+      <Stack.Navigator screenOptions={commonHeaderStyles}>
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{ title: 'Settings' }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   return (
+    <ThemeProvider>
     <ItemsProvider>
       <NavigationContainer>
       <Tab.Navigator
@@ -102,7 +116,7 @@ export default function App() {
           />
           <Tab.Screen
             name="SettingsTab" 
-            component={Settings}
+            component={SettingsStack}
             options={{
               tabBarLabel: 'Settings',
             }}
@@ -110,6 +124,7 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
     </ItemsProvider>
+    </ThemeProvider>
 
   );
 }

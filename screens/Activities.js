@@ -3,12 +3,14 @@ import React, {useContext} from 'react'
 import ItemList from '../components/ItemList'
 import { ItemsContext } from '../components/ItemsContext'
 import Styles, { commonStyles } from '../components/Styles'
+import { ThemeContext } from '../components/ThemeContext'
 
 export default function Activities({}) {
   const { items } = useContext(ItemsContext)
+  const { theme } = useContext(ThemeContext)
 
   return (
-    <View style={commonStyles.container}>
+    <View style={theme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer}>
       {items.activities.length > 0 ? (
         <FlatList
           data={items.activities}
