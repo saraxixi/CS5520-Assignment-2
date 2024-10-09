@@ -19,6 +19,18 @@ const fontSize = {
   large: 20,
 };
 
+const commonHeaderStyles = {
+  headerStyle: { backgroundColor: colors.primary},
+  headerTintColor: colors.white,
+};
+
+const commonBottomTabStyles = {
+  tabBarActiveTintColor: colors.warning,
+  tabBarInactiveTintColor: colors.white,
+  tabBarStyle: { backgroundColor: colors.primary },
+  headerShown: false,
+};
+
 const commonStyles = {
   container: {
     flex: 1,
@@ -114,4 +126,4 @@ const commonStyles = {
   },
 };
 
-export { colors, spacing, fontSize, commonStyles };
+export { colors, spacing, fontSize, commonStyles, commonHeaderStyles, commonBottomTabStyles };

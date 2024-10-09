@@ -13,6 +13,7 @@ import Settings from './screens/Settings';
 import AddActivity from './screens/AddActivity';
 import AddDiet from './screens/AddDiet';
 import { ItemsProvider } from './components/ItemsContext';
+import Styles, { commonHeaderStyles, commonBottomTabStyles } from './components/Styles';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ export default function App() {
   // Stack Navigator for Activities
   function ActivitiesStack() {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={commonHeaderStyles}>
         <Stack.Screen
           name="Activities"
           component={Activities}
@@ -47,7 +48,7 @@ export default function App() {
   // Stack Navigator for Diet
   function DietStack() {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={commonHeaderStyles}>
         <Stack.Screen
           name="Diet"
           component={Diet}
@@ -71,16 +72,25 @@ export default function App() {
   return (
     <ItemsProvider>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{headerShown: false}}>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          ...commonBottomTabStyles,
+          tabBarIcon: ({ color, size }) => {
+            if (route.name === 'ActivitiesTab') {
+              return <FontAwesome5 name="running" size={size} color={color} />;
+            } else if (route.name === 'DietTab') {
+              return <MaterialIcons name="fastfood" size={size} color={color} />;
+            } else if (route.name === 'SettingsTab') {
+              return <SimpleLineIcons name="settings" size={size} color={color} />;
+            }
+          },
+        })}
+      >
           <Tab.Screen 
             name="ActivitiesTab" 
             component={ActivitiesStack} 
             options={{
               tabBarLabel: 'Activities',
-              tabBarIcon: ({ color }) => (
-                <FontAwesome5 name="running" size={24} color={color} />
-              ),
             }}
           />
           <Tab.Screen
@@ -88,23 +98,14 @@ export default function App() {
             component={DietStack}
             options={{
               tabBarLabel: 'Diet',
-              tabBarIcon: ({ color }) => (
-                <MaterialIcons name="fastfood" size={24} color={color} />
-              ),
             }}
           />
           <Tab.Screen
             name="SettingsTab" 
             component={Settings}
-            options={() => ({
+            options={{
               tabBarLabel: 'Settings',
-              tabBarIcon: ({ color }) => (
-                <SimpleLineIcons name="settings" size={24} color={color} />
-              ),
-              headerRight: () => (
-                <Button title="Add" onPress={() => (console.log("onPress"))}/>
-              ),
-            })}
+            }}
           />
         </Tab.Navigator>
       </NavigationContainer>
