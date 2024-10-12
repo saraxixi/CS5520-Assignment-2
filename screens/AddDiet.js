@@ -10,7 +10,7 @@ export default function AddDiet({navigation}) {
   const {addDiet} = useContext(ItemsContext)
   const [description, setDescription] = useState('')
   const [calories, setCalories] = useState('')
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(null)
   const [showPicker, setShowPicker] = useState(false)
 
   function onSave() {
@@ -77,13 +77,13 @@ export default function AddDiet({navigation}) {
         <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Date *</Text>
         <TextInput
         style={commonStyles.input}
-        value={date.toDateString()}
+        value={date ? date.toDateString() : ''}
         onFocus={showDatePicker}
         placeholder='Select a date'
         />
         {showPicker && (
           <DateTimePicker
-            value={date}
+            value={date || new Date()}
             mode="date"
             display="inline"
             onChange={onDateChange}
