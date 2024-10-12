@@ -28,13 +28,13 @@ export default function AddActivity({navigation}) {
 
   function onSave () {
     if (! activity || duration.trim() === '' || ! date) {
-      Alert.alert('Error', 'Please enter all fields')
+      Alert.alert('Invalid Input', 'Please check your input value') 
       return
     }
 
     const durationValue = parseInt(duration, 10);
     if (isNaN(durationValue) || durationValue <= 0) {
-      Alert.alert('Error', 'Please enter a valid number for duration')
+      Alert.alert('Invalid Input', 'Please check your input value') 
       return
     };
 

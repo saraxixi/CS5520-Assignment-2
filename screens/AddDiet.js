@@ -15,12 +15,12 @@ export default function AddDiet({navigation}) {
 
   function onSave() {
     if (!description || calories.trim() === '' || !date) {
-      Alert.alert('Error', 'Please enter all fields')
+      Alert.alert('Invalid Input', 'Please check your input value') 
       return
     }
 
     if (isNaN(parseInt(calories, 10)) || calories <= 0) {
-      Alert.alert('Error', 'Please enter a valid number for calories')
+      Alert.alert('Invalid Input', 'Please check your input value') 
       return
     }
 
