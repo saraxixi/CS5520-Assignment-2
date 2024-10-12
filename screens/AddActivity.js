@@ -12,7 +12,7 @@ export default function AddActivity({navigation}) {
 
   const [activity, setActivity] = useState(null)
   const [duration, setDuration] = useState('')
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(null)
 
   const [showPicker, setShowPicker] = useState(false)
   const [open, setOpen] = useState(false)
@@ -98,14 +98,14 @@ export default function AddActivity({navigation}) {
         <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>Date *</Text>
         <TextInput
           style={commonStyles.input}
-          value={date.toDateString()} // Correct method usage
+          value={date ? date.toDateString() : ''}
           onFocus={showDatePicker}
           placeholder='Select a date'
         />
 
         {showPicker && (
           <DateTimePicker
-            value={date}
+            value={date || new Date()}
             mode="date"
             display="inline"
             onChange={onDateChange}
