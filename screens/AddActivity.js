@@ -62,7 +62,7 @@ export default function AddActivity({navigation}) {
     if (!date) {
       setDate(new Date());
     }
-    setShowPicker(true);
+    setShowPicker(prev => !prev);
   }
 
   function onDateChange (event, selectedDate) {
@@ -102,7 +102,8 @@ export default function AddActivity({navigation}) {
         <TextInput
           style={commonStyles.input}
           value={date ? date.toDateString() : ''}
-          onFocus={showDatePicker}
+          onPress={showDatePicker}
+          onBlur={() => setShowPicker(false)}
           placeholder='Select a date'
         />
 
