@@ -35,7 +35,7 @@ export default function AddDiet({navigation}) {
     }
 
     try {
-      addDiet(newDiet)
+      writeToDB(newDiet, 'diets')
       navigation.goBack()
     } catch (err) {
       console.log('Error saving diet:', err)
