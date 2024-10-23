@@ -12,6 +12,7 @@ import Diet from './screens/Diet';
 import Settings from './screens/Settings';
 import AddActivity from './screens/AddActivity';
 import AddDiet from './screens/AddDiet';
+import EditActivity from './screens/EditActivity';
 import { ItemsProvider } from './components/ItemsContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles, commonStyles } from './components/Styles';
@@ -49,6 +50,11 @@ export default function App() {
           name="AddActivity"
           component={AddActivity}
           options={{ title: 'Add An Activity' }} />
+        
+        <Stack.Screen
+          name="EditActivity"
+          component={EditActivity}
+          options={{ title: 'Edit Activity' }}  />
       </Stack.Navigator>
     );
   }
@@ -77,6 +83,10 @@ export default function App() {
           name="AddDiet"
           component={AddDiet}
           options={{ title: 'Add A Diet' }} />
+        {/* <Stack.Screen
+          name="EditDiet"
+          component={EditDiet}
+          options={{ title: 'Edit Diet' }}  /> */}
       </Stack.Navigator>
     );
   }

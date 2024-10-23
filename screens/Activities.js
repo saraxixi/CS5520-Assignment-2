@@ -1,13 +1,13 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import React, {useContext, useEffect, useState} from 'react'
 import ItemList from '../components/ItemList'
-import { ItemsContext } from '../components/ItemsContext'
 import { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { database } from '../firebase/FirebaseSetup'
+import PressableButton from '../components/PressableButton'
 
-export default function Activities({}) {
+export default function Activities({ navigation }) {
   // const { items } = useContext(ItemsContext)
   const [activities, setActivities] = useState([]);
   const { theme } = useContext(ThemeContext)
@@ -30,7 +30,9 @@ export default function Activities({}) {
         <FlatList
           data={activities}
           renderItem={({ item }) => (
+            <PressableButton pressedFunction={() => navigation.navigate('EditActivity', {item})}>
             <ItemList itemName={item.itemName} date={item.date} value={item.duration} isSpecial={item.isSpecial} type={'Activity'}/>
+            </PressableButton>
           )}
           keyExtractor={(item) => item.id}
         />

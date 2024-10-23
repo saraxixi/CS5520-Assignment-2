@@ -22,13 +22,11 @@ export default function PressableButton({children, pressedFunction, componentSty
 
 const styles = StyleSheet.create({
   defaultStyle: {
-    // backgroundColor: 'beige',
     padding: 5,
     borderRadius: 5,
   },
 
   defaultPressedStyle: {
-    // backgroundColor: '#a4a',
     opacity: 0.2,
   }
 })
