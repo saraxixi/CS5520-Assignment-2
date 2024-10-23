@@ -19,13 +19,17 @@ import Styles, { commonHeaderStyles, commonBottomTabStyles, commonStyles } from 
 import PressableButton from './components/PressableButton';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { database } from './firebase/FirebaseSetup';
+import { deleteFromDB } from './firebase/FirebaseHelper';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-  console.log(database);
+  function handleDelete(id, navigation) {
+    deleteFromDB(id, 'activities');
+    navigation.goBack();
+  }
   // Stack Navigator for Activities
   function ActivitiesStack() {
     return (
@@ -54,7 +58,18 @@ export default function App() {
         <Stack.Screen
           name="EditActivity"
           component={EditActivity}
-          options={{ title: 'Edit Activity' }}  />
+          options={({route, navigation}) => ({ 
+            title: 'Edit', 
+            headerRight: () => (
+              <PressableButton
+                pressedFunction={() => handleDelete(route.params.item.id, navigation)}
+              >
+              <View style={commonStyles.headerButtonContainer}>
+                <AntDesign name="delete" size={24} color="white" />
+              </View>
+              </PressableButton>
+            ),
+            })} />
       </Stack.Navigator>
     );
   }
