@@ -14,8 +14,9 @@ import AddActivity from './screens/AddActivity';
 import AddDiet from './screens/AddDiet';
 import { ItemsProvider } from './components/ItemsContext';
 import { ThemeProvider } from './components/ThemeContext';
-import Styles, { commonHeaderStyles, commonBottomTabStyles } from './components/Styles';
+import Styles, { commonHeaderStyles, commonBottomTabStyles, commonStyles } from './components/Styles';
 import PressableButton from './components/PressableButton';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,12 +36,11 @@ export default function App() {
               <PressableButton
                 pressedFunction={() => navigation.navigate('AddActivity')}
               >
-                <Text>Add</Text>
+              <View style={commonStyles.headerButtonContainer}>
+                <AntDesign name="plus" size={24} color="white" />
+                <FontAwesome5 name="running" size={24} color={"white"} />
+              </View>
               </PressableButton>
-              // <Button
-              //   title="Add"
-              //   onPress={() => navigation.navigate('AddActivity')}
-              // />
             ),
           })}
         />
@@ -61,10 +61,14 @@ export default function App() {
           component={Diet}
           options={({ navigation }) => ({
             headerRight: () => (
-              <Button
-                title="Add"
-                onPress={() => navigation.navigate('AddDiet')}
-              />
+              <PressableButton
+                pressedFunction={() => navigation.navigate('AddDiet')}
+              >
+              <View style={commonStyles.headerButtonContainer}>
+                <AntDesign name="plus" size={24} color="white" />
+                <MaterialIcons name="fastfood" size={24} color="white" />
+              </View>
+              </PressableButton>
             ),
           })}
         />

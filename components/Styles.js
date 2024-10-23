@@ -147,6 +147,12 @@ const commonStyles = {
   icon: {
     marginRight: spacing.medium,
   },
+
+  headerButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: spacing.medium,
+  },
 };
 
 export { colors, spacing, fontSize, commonStyles, commonHeaderStyles, commonBottomTabStyles };
