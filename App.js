@@ -15,7 +15,7 @@ import AddDiet from './screens/AddDiet';
 import { ItemsProvider } from './components/ItemsContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles } from './components/Styles';
-import PressableButton from './components/pressableButton';
+import PressableButton from './components/PressableButton';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,10 +32,15 @@ export default function App() {
           component={Activities}
           options={({ navigation }) => ({
             headerRight: () => (
-              <Button
-                title="Add"
-                onPress={() => navigation.navigate('AddActivity')}
-              />
+              <PressableButton
+                pressedFunction={() => navigation.navigate('AddActivity')}
+              >
+                <Text>Add</Text>
+              </PressableButton>
+              // <Button
+              //   title="Add"
+              //   onPress={() => navigation.navigate('AddActivity')}
+              // />
             ),
           })}
         />
