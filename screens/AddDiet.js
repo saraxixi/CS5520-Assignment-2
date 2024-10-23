@@ -4,6 +4,8 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { ItemsContext } from '../components/ItemsContext'
 import Styles, { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
+import { writeToDB } from '../firebase/FirebaseHelper'
+
 
 export default function AddDiet({navigation}) {
   const {theme} = useContext(ThemeContext)
@@ -32,10 +34,12 @@ export default function AddDiet({navigation}) {
       isSpecial: calories > 800,
     }
 
-    addDiet(newDiet)
-    navigation.goBack()
-
-    console.log(newDiet)
+    try {
+      addDiet(newDiet)
+      navigation.goBack()
+    } catch (err) {
+      console.log('Error saving diet:', err)
+    }
   }
 
   function onCancel() {
