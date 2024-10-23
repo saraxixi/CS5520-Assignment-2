@@ -49,9 +49,6 @@ export default function AddActivity({navigation}) {
 
     try {
       writeToDB(newActivity, 'activities');
-      // const savedActivity = { id: docRef.id, ...newActivity };
-      // addActivity(savedActivity);
-      // console.log('Saved Activity:', savedActivity);
       navigation.goBack();
     } catch (err) {
       console.log('Error saving activity:', err);

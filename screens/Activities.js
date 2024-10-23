@@ -13,13 +13,15 @@ export default function Activities({}) {
   const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
-    onSnapshot(collection(database, 'activities'), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(database, 'activities'), (snapshot) => {
       let newAarry = [];
       snapshot.forEach((docSnapshot) => {
         newAarry.push({...docSnapshot.data(), id: docSnapshot.id});
       });
       setActivities(newAarry);
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (

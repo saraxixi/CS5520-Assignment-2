@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native'
 import React,  { useContext, useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { ItemsContext } from '../components/ItemsContext'
 import Styles, { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
 import { writeToDB } from '../firebase/FirebaseHelper'
@@ -9,7 +8,6 @@ import { writeToDB } from '../firebase/FirebaseHelper'
 
 export default function AddDiet({navigation}) {
   const {theme} = useContext(ThemeContext)
-  const {addDiet} = useContext(ItemsContext)
   const [description, setDescription] = useState('')
   const [calories, setCalories] = useState('')
   const [date, setDate] = useState(null)
