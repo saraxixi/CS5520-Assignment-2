@@ -2,12 +2,11 @@ import { Alert, StyleSheet, Text, TextInput, View, Button} from 'react-native'
 import React, { useState, useContext }from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { ItemsContext } from '../components/ItemsContext'
 import { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
+import { writeToDB } from '../firebase/FirebaseHelper'
 
 export default function AddActivity({navigation}) {
-  const { addActivity } = useContext(ItemsContext)
   const { theme } = useContext(ThemeContext)
 
   const [activity, setActivity] = useState(null)
@@ -48,10 +47,15 @@ export default function AddActivity({navigation}) {
       isSpecial
     };
 
-    addActivity(newActivity);
-    navigation.goBack();
-
-    console.log(newActivity);
+    try {
+      writeToDB(newActivity, 'activities');
+      // const savedActivity = { id: docRef.id, ...newActivity };
+      // addActivity(savedActivity);
+      // console.log('Saved Activity:', savedActivity);
+      navigation.goBack();
+    } catch (err) {
+      console.log('Error saving activity:', err);
+    }
   };
 
   function onCancel () {
