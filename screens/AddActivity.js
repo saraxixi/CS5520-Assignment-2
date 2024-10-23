@@ -47,12 +47,8 @@ export default function AddActivity({navigation}) {
       isSpecial
     };
 
-    try {
-      writeToDB(newActivity, 'activities');
-      navigation.goBack();
-    } catch (err) {
-      console.log('Error saving activity:', err);
-    }
+    writeToDB(newActivity, 'activities');
+    navigation.goBack();
   };
 
   function onCancel () {
