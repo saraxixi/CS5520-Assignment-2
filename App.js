@@ -17,13 +17,14 @@ import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles, commonStyles } from './components/Styles';
 import PressableButton from './components/PressableButton';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { database } from './firebase/FirebaseSetup';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-
+  console.log(database);
   // Stack Navigator for Activities
   function ActivitiesStack() {
     return (
