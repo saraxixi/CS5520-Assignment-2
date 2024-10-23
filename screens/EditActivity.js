@@ -48,8 +48,15 @@ export default function EditActivity({ route, navigation }) {
       isSpecial
     };
 
-    updateDB(newActivity, item.id, 'activities');
-    navigation.goBack();
+    Alert.alert('Important', 'Are you sure you want to save these change?', [
+      { text: 'No' },
+      { text: 'Yes', 
+        onPress: () => {
+          updateDB(newActivity, item.id, 'activities');
+          navigation.goBack();
+        }
+      }
+    ]);
   };
 
   function onCancel () {

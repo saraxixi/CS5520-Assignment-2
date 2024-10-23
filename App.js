@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,9 +26,18 @@ const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-  function handleDelete(id, navigation) {
-    deleteFromDB(id, 'activities');
-    navigation.goBack();
+
+  function handleDelete(id, collectionName, navigation) {
+    Alert.alert('Delete', 'Are you sure you want to delete this item?', [
+      { text: 'No' },
+      { text: 'Yes', 
+        onPress: () => {
+          deleteFromDB(id, collectionName);
+          navigation.goBack();
+        }
+      }
+    ]);
+
   }
   // Stack Navigator for Activities
   function ActivitiesStack() {
@@ -62,7 +71,7 @@ export default function App() {
             title: 'Edit', 
             headerRight: () => (
               <PressableButton
-                pressedFunction={() => handleDelete(route.params.item.id, navigation)}
+                pressedFunction={() => handleDelete(route.params.item.id, "activities", navigation)}
               >
               <View style={commonStyles.headerButtonContainer}>
                 <AntDesign name="delete" size={24} color="white" />
