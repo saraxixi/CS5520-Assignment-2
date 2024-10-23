@@ -43,6 +43,9 @@ export default function AddDiet({navigation}) {
   }
 
   function showDatePicker() {
+    if (!date) {
+      setDate(new Date())
+    }
     setShowPicker(true)
   }
 

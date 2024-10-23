@@ -59,6 +59,9 @@ export default function AddActivity({navigation}) {
   };
 
   function showDatePicker () {
+    if (!date) {
+      setDate(new Date());
+    }
     setShowPicker(true);
   }
 
