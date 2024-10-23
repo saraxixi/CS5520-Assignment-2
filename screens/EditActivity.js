@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native'
+import Checkbox from 'expo-checkbox';
 import React, {useState, useContext} from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -13,6 +14,7 @@ export default function EditActivity({ route, navigation }) {
   const [activity, setActivity] = useState(item.itemName)
   const [duration, setDuration] = useState(item.duration.toString())
   const [date, setDate] = useState(new Date(item.date))
+  const [isSpecialLocal, setIsSpecialLocal] = useState(item.isSpecial)
 
   const [showPicker, setShowPicker] = useState(false)
   const [open, setOpen] = useState(false)
@@ -45,7 +47,7 @@ export default function EditActivity({ route, navigation }) {
       itemName: activity,
       date: date.toDateString(),
       duration: durationValue,
-      isSpecial
+      isSpecial: isSpecialLocal,
     };
 
     Alert.alert('Important', 'Are you sure you want to save these change?', [
@@ -122,9 +124,24 @@ export default function EditActivity({ route, navigation }) {
         )}
       </View>
 
-      <View style={commonStyles.buttonContainer}>
-        <Button title="Save" onPress={onSave} />
-        <Button title="Cancel" onPress={onCancel} color="red" />
+      <View style={styles.bottomContainer}>
+          {item.isSpecial && (
+            <View style={styles.checkboxContainer}>
+              <View style={styles.textContainer}>
+              <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>
+                This item is special. Select the checkbox if you would like to approve it.
+              </Text>
+              </View>
+
+              <View style={styles.checkbox}>
+                <Checkbox value={!isSpecialLocal} onValueChange={(value) => setIsSpecialLocal(!value)} />
+              </View>
+            </View>
+          )}
+        <View style={commonStyles.buttonContainer}>
+          <Button title="Save" onPress={onSave} />
+          <Button title="Cancel" onPress={onCancel} color="red" />
+        </View>
       </View>
     </View>
   )
@@ -149,5 +166,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     borderWidth: 1,
+  },
+
+  bottomContainer: {
+    marginTop: 250,
+  },
+
+  textContainer: {
+    flex: 1,
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+  },
+
+  checkbox: {
+    marginRight: 10,
   },
 })
