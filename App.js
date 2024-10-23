@@ -15,6 +15,7 @@ import AddDiet from './screens/AddDiet';
 import { ItemsProvider } from './components/ItemsContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles } from './components/Styles';
+import PressableButton from './components/pressableButton';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
