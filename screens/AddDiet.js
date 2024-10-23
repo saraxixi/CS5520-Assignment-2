@@ -48,7 +48,7 @@ export default function AddDiet({navigation}) {
     if (!date) {
       setDate(new Date())
     }
-    setShowPicker(true)
+    setShowPicker(prev => !prev)
   }
 
   function onDateChange(event, selectedDate) {
@@ -83,7 +83,8 @@ export default function AddDiet({navigation}) {
         <TextInput
         style={commonStyles.input}
         value={date ? date.toDateString() : ''}
-        onFocus={showDatePicker}
+        onPress={showDatePicker}
+        onBlur={() => setShowPicker(false)}
         placeholder='Select a date'
         />
         {showPicker && (
