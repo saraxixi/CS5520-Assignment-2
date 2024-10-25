@@ -11,7 +11,7 @@ import Activities from './screens/Activities';
 import Diet from './screens/Diet';
 import Settings from './screens/Settings';
 import AddEditActivity from './screens/AddEditActivity';
-import AddDiet from './screens/AddDiet';
+import AddEditDiet from './screens/AddEditDiet';
 import { ItemsProvider } from './components/ItemsContext';
 import { ThemeProvider } from './components/ThemeContext';
 import Styles, { commonHeaderStyles, commonBottomTabStyles, commonStyles } from './components/Styles';
@@ -92,7 +92,7 @@ export default function App() {
           options={({ navigation }) => ({
             headerRight: () => (
               <PressableButton
-                pressedFunction={() => navigation.navigate('AddDiet')}
+                pressedFunction={() => navigation.navigate('AddEditDiet')}
               >
               <View style={commonStyles.headerButtonContainer}>
                 <AntDesign name="plus" size={24} color="white" />
@@ -102,14 +102,26 @@ export default function App() {
             ),
           })}
         />
-        <Stack.Screen 
-          name="AddDiet"
-          component={AddDiet}
-          options={{ title: 'Add A Diet' }} />
-        {/* <Stack.Screen
-          name="EditDiet"
-          component={EditDiet}
-          options={{ title: 'Edit Diet' }}  /> */}
+        {/* Add / Edit Diet Screen */}
+        <Stack.Screen
+          name="AddEditDiet"
+          component={AddEditDiet}
+          options={({ route, navigation }) => ({
+            title: route.params?.diets ? 'Edit Diet' : 'Add Diet', // Conditional title
+            headerRight: () =>
+              route.params?.activity && ( // Only show delete button for editing
+                <PressableButton
+                  pressedFunction={() =>
+                    handleDelete(route.params.diets.id, 'diets', navigation)
+                  }
+                >
+                  <View style={commonStyles.headerButtonContainer}>
+                    <AntDesign name="delete" size={24} color="white" />
+                  </View>
+                </PressableButton>
+              ),
+          })}
+        />
       </Stack.Navigator>
     );
   }
