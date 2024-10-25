@@ -41,11 +41,20 @@ export default function AddEditDiet({ route, navigation}) {
     }
 
     if (isEdit) {
-      updateDB(newDiet, newDiet.id, 'diets');
+      Alert.alert('Important', 'Are you sure you want to save these changes?', [
+        { text: 'No' },
+        {
+          text: 'Yes',
+          onPress: () => ([
+            updateDB(newDiet, newDiet.id, 'diets'),
+            navigation.goBack()
+          ])
+        },]
+      );
     } else {
       writeToDB(newDiet, 'diets');
+      navigation.goBack();
     }
-    navigation.goBack();
   }
 
   function onCancel() {

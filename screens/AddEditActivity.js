@@ -55,11 +55,20 @@ export default function AddEditActivity({ route, navigation }) {
     };
 
     if (isEdit) {
-      updateDB(newActivity, newActivity.id, 'activities');
+      Alert.alert('Important', 'Are you sure you want to save these changes?', [
+        { text: 'No' },
+        {
+          text: 'Yes',
+          onPress: () => ([
+            updateDB(newActivity, newActivity.id, 'activities'),
+            navigation.goBack()
+          ])
+        },]
+      );
     } else {
       writeToDB(newActivity, 'activities');
+      navigation.goBack();
     }
-    navigation.goBack();
   }
 
   function onCancel() {
