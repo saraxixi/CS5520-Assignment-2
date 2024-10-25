@@ -5,8 +5,9 @@ import Styles, { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
 import { writeToDB, updateDB } from '../firebase/FirebaseHelper'
 import PressableButton from '../components/PressableButton'
+import Checkbox from 'expo-checkbox';
 
-export default function AddDiet({ route, navigation}) {
+export default function AddEditDiet({ route, navigation}) {
   const {theme} = useContext(ThemeContext)
 
   const isEdit = route.params?.diets !== undefined
@@ -14,7 +15,7 @@ export default function AddDiet({ route, navigation}) {
   const [description, setDescription] = useState(isEdit ? route.params.diets.description : null)
   const [calories, setCalories] = useState(isEdit ? route.params.diets.calories.toString() : '')
   const [date, setDate] = useState(isEdit ? new Date(route.params.diets.date) : null)
-  const [isSpecialLocal, setIsSpecialLocal] = useState(false)
+  const [isSpecialLocal, setIsSpecialLocal] = useState(isEdit ? route.params.diets.isSpecial : false)
 
   const [showPicker, setShowPicker] = useState(false)
 
@@ -29,12 +30,14 @@ export default function AddDiet({ route, navigation}) {
       return
     }
 
+    const isSpecial = calories > 800
+
     const newDiet = {
       id: isEdit ? route.params.diets.id : Date.now().toString(),
       description: description,
       date: date.toDateString(),
       calories: calories,
-      isSpecial: isEdit ? isSpecialLocal : calories > 800,
+      isSpecial: isEdit ? isSpecialLocal : isSpecial,
     }
 
     if (isEdit) {
@@ -137,27 +140,8 @@ export default function AddDiet({ route, navigation}) {
 }
 
 const styles = StyleSheet.create({
-  dropDown: {
-    backgroundColor: 'lightgray',
-    marginBottom: 20,
-    elevation: 3,
-  },
-  
-  dropDownContainer: {
-    backgroundColor: '#fff',
-    borderColor: '#3b3c7e',
-  },
-
-  input: {
-    backgroundColor: 'lightgray',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-  },
-
   bottomContainer: {
-    marginTop: 250,
+    marginTop: 200,
   },
 
   textContainer: {

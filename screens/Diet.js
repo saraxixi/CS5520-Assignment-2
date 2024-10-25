@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, {useContext, useState, useEffect} from 'react'
 import ItemList from '../components/ItemList'
 import { ItemsContext } from '../components/ItemsContext'
@@ -6,8 +6,9 @@ import Styles, { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { database } from '../firebase/FirebaseSetup'
+import PressableButton from '../components/PressableButton'
 
-export default function Diet() {
+export default function Diet({ navigation }) {
   const [diets, setDiets] = useState([])
   const {theme} = useContext(ThemeContext)
 
@@ -30,7 +31,11 @@ export default function Diet() {
         <FlatList
           data={diets}
           renderItem={({ item }) => (
+            <PressableButton
+              pressedFunction={() => navigation.navigate('AddEditDiet', { diets: item })}
+            >
             <ItemList itemName={item.description} date={item.date} value={item.calories} isSpecial={item.isSpecial} type={'Diet'}/>
+            </PressableButton>
           )}
           keyExtractor={(item) => item.id}
         />

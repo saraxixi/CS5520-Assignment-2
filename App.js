@@ -109,7 +109,7 @@ export default function App() {
           options={({ route, navigation }) => ({
             title: route.params?.diets ? 'Edit Diet' : 'Add Diet', // Conditional title
             headerRight: () =>
-              route.params?.activity && ( // Only show delete button for editing
+              route.params?.diets && ( // Only show delete button for editing
                 <PressableButton
                   pressedFunction={() =>
                     handleDelete(route.params.diets.id, 'diets', navigation)
