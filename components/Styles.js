@@ -127,6 +127,7 @@ const commonStyles = {
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: spacing.large,
   },
 
   activityContainer: {

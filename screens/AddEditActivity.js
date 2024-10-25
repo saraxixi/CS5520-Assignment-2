@@ -1,10 +1,11 @@
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import React, { useState, useContext, useEffect } from 'react';
+import Checkbox from 'expo-checkbox';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { commonStyles } from '../components/Styles';
 import { ThemeContext } from '../components/ThemeContext';
-import { writeToDB, updateInDB } from '../firebase/FirebaseHelper';
+import { writeToDB, updateDB } from '../firebase/FirebaseHelper';
 import PressableButton from '../components/PressableButton';
 
 export default function AddEditActivity({ route, navigation }) {
@@ -17,7 +18,8 @@ export default function AddEditActivity({ route, navigation }) {
   const [activity, setActivity] = useState(isEdit ? route.params.activity.itemName : null);
   const [duration, setDuration] = useState(isEdit ? route.params.activity.duration.toString() : '');
   const [date, setDate] = useState(isEdit ? new Date(route.params.activity.date) : null);
-  
+  const [isSpecialLocal, setIsSpecialLocal] = useState(isEdit ? route.params.activity.isSpecial : false);
+
   const [showPicker, setShowPicker] = useState(false);
   const [open, setOpen] = useState(false);
   const [items] = useState([
@@ -49,11 +51,11 @@ export default function AddEditActivity({ route, navigation }) {
       itemName: activity,
       date: date.toDateString(),
       duration: durationValue,
-      isSpecial,
+      isSpecial: isEdit ? isSpecialLocal : isSpecial,
     };
 
     if (isEdit) {
-      updateInDB(newActivity, 'activities');
+      updateDB(newActivity, newActivity.id, 'activities');
     } else {
       writeToDB(newActivity, 'activities');
     }
@@ -129,20 +131,35 @@ export default function AddEditActivity({ route, navigation }) {
         )}
       </View>
 
-      <View style={commonStyles.buttonContainer}>
-        <PressableButton
-          pressedFunction={onCancel}
-          componentStyles={{ backgroundColor: 'red', paddingVertical: 8, paddingHorizontal: 60, borderRadius: 5 }}
-        >
-          <Text style={{ color: 'white', fontSize: 16 }}>Cancel</Text>
-        </PressableButton>
+      <View style={styles.bottomContainer}>
+          {isEdit && route.params.activity.isSpecial && (
+            <View style={styles.checkboxContainer}>
+              <View style={styles.textContainer}>
+              <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>
+                This item is special. Select the checkbox if you would like to approve it.
+              </Text>
+              </View>
 
-        <PressableButton
-          pressedFunction={onSave}
-          componentStyles={{ backgroundColor: 'blue', paddingVertical: 8, paddingHorizontal: 60, borderRadius: 5 }}
-        >
-          <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
-        </PressableButton>
+              <View style={styles.checkbox}>
+                <Checkbox value={!isSpecialLocal} onValueChange={(value) => setIsSpecialLocal(!value)} />
+              </View>
+            </View>
+          )}
+        <View style={commonStyles.buttonContainer}>
+          <PressableButton
+            pressedFunction={onCancel}
+            componentStyles={{ backgroundColor: 'red', paddingVertical: 8, paddingHorizontal: 60, borderRadius: 5 }}
+          >
+            <Text style={{ color: 'white', fontSize: 16 }}>Cancel</Text>
+          </PressableButton>
+
+          <PressableButton
+            pressedFunction={onSave}
+            componentStyles={{ backgroundColor: 'blue', paddingVertical: 8, paddingHorizontal: 60, borderRadius: 5 }}
+          >
+            <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
+          </PressableButton>
+        </View>
       </View>
     </View>
   );
@@ -154,15 +171,33 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     elevation: 3,
   },
+  
   dropDownContainer: {
     backgroundColor: '#fff',
     borderColor: '#3b3c7e',
   },
+
   input: {
     backgroundColor: 'lightgray',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
     borderWidth: 1,
+  },
+
+  bottomContainer: {
+    marginTop: 250,
+  },
+
+  textContainer: {
+    flex: 1,
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+  },
+
+  checkbox: {
+    marginRight: 10,
   },
 });
