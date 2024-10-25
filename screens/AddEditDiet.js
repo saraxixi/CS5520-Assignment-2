@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native'
-import React,  { useContext, useState } from 'react'
+import React,  { useContext, useState, useEffect } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Styles, { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
@@ -16,6 +16,7 @@ export default function AddEditDiet({ route, navigation}) {
   const [calories, setCalories] = useState(isEdit ? route.params.diets.calories.toString() : '')
   const [date, setDate] = useState(isEdit ? new Date(route.params.diets.date) : null)
   const [isSpecialLocal, setIsSpecialLocal] = useState(isEdit ? route.params.diets.isSpecial : false)
+  const [userChangedCheckbox, setUserChangedCheckbox] = useState(false);
 
   const [showPicker, setShowPicker] = useState(false)
 
@@ -30,14 +31,14 @@ export default function AddEditDiet({ route, navigation}) {
       return
     }
 
-    const isSpecial = calories > 800
+    const autoSpecial = calories > 800
 
     const newDiet = {
       id: isEdit ? route.params.diets.id : Date.now().toString(),
       description: description,
       date: date.toDateString(),
       calories: calories,
-      isSpecial: isEdit ? isSpecialLocal : isSpecial,
+      isSpecial: userChangedCheckbox ? isSpecialLocal : autoSpecial,
     }
 
     if (isEdit) {
@@ -124,7 +125,13 @@ export default function AddEditDiet({ route, navigation}) {
               </View>
 
               <View style={styles.checkbox}>
-                <Checkbox value={!isSpecialLocal} onValueChange={(value) => setIsSpecialLocal(!value)} />
+                <Checkbox 
+                  value={!isSpecialLocal}
+                  onValueChange={(value) => {
+                    setIsSpecialLocal(!value)
+                    setUserChangedCheckbox(true)
+                  }}
+                />
               </View>
             </View>
           )}

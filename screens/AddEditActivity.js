@@ -19,6 +19,7 @@ export default function AddEditActivity({ route, navigation }) {
   const [duration, setDuration] = useState(isEdit ? route.params.activity.duration.toString() : '');
   const [date, setDate] = useState(isEdit ? new Date(route.params.activity.date) : null);
   const [isSpecialLocal, setIsSpecialLocal] = useState(isEdit ? route.params.activity.isSpecial : false);
+  const [userChangedCheckbox, setUserChangedCheckbox] = useState(false);
 
   const [showPicker, setShowPicker] = useState(false);
   const [open, setOpen] = useState(false);
@@ -44,14 +45,14 @@ export default function AddEditActivity({ route, navigation }) {
       return;
     }
 
-    const isSpecial = (activity === 'Running' || activity === 'Weights') && durationValue > 60;
+    const autoSpecial = (activity === 'Running' || activity === 'Weights') && durationValue > 60;
 
     const newActivity = {
       id: isEdit ? route.params.activity.id : Date.now().toString(),
       itemName: activity,
       date: date.toDateString(),
       duration: durationValue,
-      isSpecial: isEdit ? isSpecialLocal : isSpecial,
+      isSpecial: userChangedCheckbox ? isSpecialLocal : autoSpecial,
     };
 
     if (isEdit) {
@@ -144,13 +145,19 @@ export default function AddEditActivity({ route, navigation }) {
           {isEdit && route.params.activity.isSpecial && (
             <View style={styles.checkboxContainer}>
               <View style={styles.textContainer}>
-              <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>
-                This item is special. Select the checkbox if you would like to approve it.
-              </Text>
+                <Text style={theme === 'light' ? commonStyles.lightLabel : commonStyles.darkLabel}>
+                  This item is special. Select the checkbox if you would like to approve it.
+                </Text>
               </View>
 
               <View style={styles.checkbox}>
-                <Checkbox value={!isSpecialLocal} onValueChange={(value) => setIsSpecialLocal(!value)} />
+                <Checkbox 
+                  value={!isSpecialLocal}
+                  onValueChange={(value) => {
+                    setIsSpecialLocal(!value)
+                    setUserChangedCheckbox(true)
+                  }} 
+                />
               </View>
             </View>
           )}
