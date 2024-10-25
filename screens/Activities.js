@@ -30,7 +30,7 @@ export default function Activities({ navigation }) {
         <FlatList
           data={activities}
           renderItem={({ item }) => (
-            <PressableButton pressedFunction={() => navigation.navigate('EditActivity', {item})}>
+            <PressableButton pressedFunction={() => navigation.navigate('AddEditActivity', {item})}>
             <ItemList itemName={item.itemName} date={item.date} value={item.duration} isSpecial={item.isSpecial} type={'Activity'}/>
             </PressableButton>
           )}

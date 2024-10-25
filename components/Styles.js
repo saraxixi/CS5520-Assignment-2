@@ -7,6 +7,7 @@ const colors = {
   warning: '#FFC300',
   lightGray: 'lightgray',
   black: 'black',
+  red: 'red',
 };
 
 const spacing = {
@@ -153,6 +154,13 @@ const commonStyles = {
     alignItems: 'center',
     marginRight: spacing.medium,
   },
+
+  buttonText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  
 };
 
 export { colors, spacing, fontSize, commonStyles, commonHeaderStyles, commonBottomTabStyles };

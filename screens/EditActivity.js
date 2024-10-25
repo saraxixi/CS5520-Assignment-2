@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { commonStyles } from '../components/Styles'
 import { ThemeContext } from '../components/ThemeContext'
 import { updateDB } from '../firebase/FirebaseHelper'
+import PressableButton from '../components/PressableButton'
 
 export default function EditActivity({ route, navigation }) {
   const { item } = route.params;
@@ -139,8 +140,8 @@ export default function EditActivity({ route, navigation }) {
             </View>
           )}
         <View style={commonStyles.buttonContainer}>
-          <Button title="Save" onPress={onSave} />
-          <Button title="Cancel" onPress={onCancel} color="red" />
+          {/* <Button title="Save" onPress={onSave} />
+          <Button title="Cancel" onPress={onCancel} color="red" /> */}
         </View>
       </View>
     </View>
@@ -182,5 +183,11 @@ const styles = StyleSheet.create({
 
   checkbox: {
     marginRight: 10,
+  },
+
+  buttonText: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#ffffff',
   },
 })
