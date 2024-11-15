@@ -7,6 +7,7 @@ const colors = {
   warning: '#FFC300',
   lightGray: 'lightgray',
   black: 'black',
+  red: 'red',
 };
 
 const spacing = {
@@ -126,6 +127,7 @@ const commonStyles = {
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: spacing.large,
   },
 
   activityContainer: {
@@ -147,6 +149,19 @@ const commonStyles = {
   icon: {
     marginRight: spacing.medium,
   },
+
+  headerButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: spacing.medium,
+  },
+
+  buttonText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  
 };
 
 export { colors, spacing, fontSize, commonStyles, commonHeaderStyles, commonBottomTabStyles };
